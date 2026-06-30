@@ -1,0 +1,4 @@
+.mi_env/
+
+#pycache
+__pycache__/
