@@ -10,6 +10,9 @@ class TransaccionBase(BaseModel):
 class TransaccionCreate(TransaccionBase):
     pass
 
+class TransaccionEditar(TransaccionBase):
+    pass
+
 # Modelo para responder una transacción
 class Transaccion(TransaccionBase):
     id: int | None = None

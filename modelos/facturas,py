@@ -1,13 +1,17 @@
 from pydantic import BaseModel
+from clientes import Cliente
 
 # Modelo base de factura
 class FacturaBase(BaseModel):
     fecha: str
     vr_total: float
-    cliente: int
+    cliente: Cliente
 
 # Modelo para crear una factura
-class FacturaCreate(FacturaBase):
+class FacturaCrear(FacturaBase):
+    pass
+
+class FacturaEditar(FacturaBase):
     pass
 
 # Modelo para responder una factura
