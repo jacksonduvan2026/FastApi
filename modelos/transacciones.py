@@ -7,9 +7,10 @@ class TransaccionBase(BaseModel):
     id_factura: int
 
 # Modelo para crear una transacción
-class TransaccionCreate(TransaccionBase):
+class TransaccionCrear(TransaccionBase):
     pass
 
+# Modelo para editar una transacción
 class TransaccionEditar(TransaccionBase):
     pass
 
