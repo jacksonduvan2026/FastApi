@@ -1,24 +1,29 @@
 from fastapi import FastAPI, Depends
 from typing import Annotated
-from sqlmodel import Session, create_engine, SQLModel
+from sqlmodel import Session, SQLModel, create_engine
+from contextlib import asynccontextmanager
+
+from modelos.clientes import Cliente
+from modelos.facturas import Factura
+from modelos.transacciones import Transaccion
 
 nombre_bd = "bd_clientes.sqlite3"
 url_bd = f"sqlite:///{nombre_bd}"
 
-#motor de base de datos
-motor_bd = create_engine(url_bd)
+motor_bd = create_engine(
+    url_bd,
+    connect_args={"check_same_thread": False}
+)
 
-
-#definir el metodo para crear las tablas
-def crear_tablas(app: FastAPI):
+@asynccontextmanager
+async def crear_tablas(app: FastAPI):
     SQLModel.metadata.create_all(motor_bd)
-    yield #no hay nada para retornar o ejecutar
+    yield
 
-#definir metodo para la sesion
+app = FastAPI(lifespan=crear_tablas)
+
 def obtener_sesion():
     with Session(motor_bd) as sesion:
-        yield sesion#retorna la sesion
-        
-#denominado inyeccion de dependencias.
-#registrar la sesion como dependencia, utilizada en nuestro endpoint
-Sesion_dependencia = Annotated[Session, Depends(obtener_sesion)]
+        yield sesion
+
+sesion_dependencia = Annotated[Session, Depends(obtener_sesion)]

@@ -1,7 +1,8 @@
-from pydantic import BaseModel, computed_field
-from .transacciones import Transaccion
-from .clientes import Cliente
 from datetime import datetime
+from sqlmodel import SQLModel, Field, Relationship
+from pydantic import BaseModel, computed_field
+from app.modelos.clientes import Cliente, ClienteLeer
+from ..modelos.transacciones import Transacciones
 
 
 # Modelo base de factura

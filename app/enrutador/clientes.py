@@ -1,8 +1,9 @@
-from fastapi import APIRouter, HTTPException
-from ..modelos.clientes import Cliente, ClienteCrear, ClienteEditar
+from fastapi import APIRouter, HTTPException, status
+from ..modelos.clientes import  Cliente, ClienteCrear, ClienteEditar
 from ..listas import lista_clientes
 from ..conexion_bd import Sesion_dependencia
 from sqlmodel import select
+
 
 rutas_clientes = APIRouter()
 
@@ -10,20 +11,25 @@ rutas_clientes = APIRouter()
 
 # Endpoint para obtener o listar todos los clientes
 @rutas_clientes.get("/clientes", response_model=list[Cliente])
-async def listar_clientes(sesion_dependencia):
-    lista_cli = sesion.exec(select(cliente)).all()
-    return lista_cli
+async def listar_clientes():
+    return lista_clientes
 
 
 # Endpoint para obtener o listar un solo cliente de la lista
-@rutas_clientes.get("/clientes/{cliente_id}", response_model=Cliente)
-async def listar_cliente(cliente_id: int, sesion: Sesion_dependencia):
-    for obj_cliente in lista_clientes:
+@rutas_clientes.get(
+        "/clientes/{cliente_id}",
+          response_model=Cliente,
+          )
+async def listar_cliente(cliente_id: int, sesion: sesion_dependencia):
+    #recorrer la lista_clientes
+    for i, obj_cliente in enumerate(lista_clientes):
         if obj_cliente.id == cliente_id:
             return obj_cliente
     raise HTTPException(
-        status_code=400, detail=f"El cliente con id {cliente_id} no existe"
+        status_code=400,
+        detail=f"El cliente con id {cliente_id} no existe"
     )
+
 
         
 # endpoint para crear un cliente, y agregar a la lista

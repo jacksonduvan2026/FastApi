@@ -1,7 +1,14 @@
 from fastapi import APIRouter, HTTPException
-from ..modelos.transacciones import Transaccion, TransaccionCrear, TransaccionEditar
-from ..modelos.facturas import Factura
-from ..listas import lista_transacciones, lista_facturas
+from fastapi.responses import JSONResponse
+from datetime import datetime
+from ..modelos.transacciones import Transacciones, TransaccionesCrear, TransaccionesEditar
+from ..modelos.facturas import Factura, FacturaCrear
+from .clientes import lista_clientes
+from .facturas import lista_facturas
+from ..listas import lista_clientes, lista_facturas, lista_transacciones
+from ..conexion_bd import Sesion_dependencia
+from sqlmodel import select
+
 
 rutas_transacciones = APIRouter()
 

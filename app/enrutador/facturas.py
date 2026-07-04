@@ -1,7 +1,11 @@
-from fastapi import APIRouter, HTTPException, status
-from ..modelos.facturas import Factura, FacturaCrear, FacturaEditar
-from ..listas import lista_facturas, lista_clientes
+from fastapi import APIRouter, HTTPException
+from datetime import datetime
 
+from ..modelos.facturas import Factura, FacturaCrear, FacturaEditar, FacturaLeer, FacturaLeerCompuesta
+from ..listas import lista_facturas, lista_clientes
+from..conexion_bd import Sesion_dependencia
+from sqlmodel import select
+from ..modelos.clientes import Cliente
 rutas_facturas = APIRouter()
 
 

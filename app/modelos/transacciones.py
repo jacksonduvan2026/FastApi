@@ -1,4 +1,6 @@
-from pydantic import BaseModel
+from sqlmodel import SQLModel, Field, Relationship
+from typing import Optional
+
 
 # Modelo base de transacción
 class TransaccionBase(BaseModel):
