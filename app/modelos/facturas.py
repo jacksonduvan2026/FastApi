@@ -5,40 +5,46 @@ from app.modelos.clientes import Cliente, ClienteLeer
 from ..modelos.transacciones import Transacciones
 
 
-# Modelo base de factura
-class FacturaBase(BaseModel):
-    fecha: str = datetime.now()
-    cliente: Cliente
-    transacciones: list[Transaccion] = []
-
+class FacturaBase(SQLModel):
+    fecha: str = Field(default=datetime.now ())
+    
+    
     @computed_field
     @property
     def vr_total(self) -> float:
-        # calcular (cantidad * vr_unitario)
-        # consultar el id actual de la factura
-        factura_id_actual = getattr(self, "id", None)
         total_factura = 0.0
 
-        if factura_id_actual is None or not self.transacciones:
+        if not hasattr(self, "transacciones") or not self.transacciones:
             return total_factura
 
-        # recorrer la lista de transacciones según el factura_id
         for transaccion in self.transacciones:
-            if transaccion.factura_id == factura_id_actual:
-                total_factura += transaccion.vr_unitario * transaccion.cantidad
+            total_factura += transaccion.vr_unitario * transaccion.cantidad
 
         return total_factura
 
-
-# Modelo para crear una factura
+   
+        
 class FacturaCrear(FacturaBase):
+    
     pass
 
-
-class FacturaEditar(FacturaBase):
+class FacturaEditar(BaseModel):
+    cliente_id: int | None = None
     pass
 
-
-# Modelo para responder una factura
 class Factura(FacturaBase):
     id: int | None = None
+
+class Factura(FacturaBase, table=True):
+    id: int | None = Field(default=None, primary_key=True )
+    cliente_id: int= Field(default=None, foreign_key="cliente.id")
+    cliente : Cliente = Relationship(back_populates="factura")
+    transacciones: list[Transacciones] = Relationship(back_populates="factura")
+
+class FacturaLeer(FacturaBase): 
+    id: int
+    cliente: ClienteLeer
+    #transacciones: list[Transacciones]=[]
+
+class FacturaLeerCompuesta(FacturaLeer):
+    transacciones: list[Transacciones]=[]

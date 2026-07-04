@@ -1,6 +1,7 @@
-from .modelos.facturas import Factura, FacturaCrear, FacturaEditar
-from .modelos.clientes import Cliente   
-from .modelos.transacciones import Transaccion
+from .modelos.clientes import Cliente
+from .modelos.facturas import Factura
+from .modelos.transacciones import Transacciones
+
 lista_clientes: list[Cliente] = []
 lista_facturas: list[Factura] = []
-lista_transacciones: list[Transaccion] = []
+lista_transacciones: list[Transacciones] = []

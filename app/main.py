@@ -20,3 +20,7 @@ app.include_router(facturas.rutas_facturas, tags=["Facturas"])
 #SE INCLUYE RUTA DE TRANSACCIONES 
 app.include_router(transacciones.rutas_transacciones, tags=["Transacciones"])
 
+
+    
+    
+        

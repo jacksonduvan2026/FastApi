@@ -1,72 +1,64 @@
 from fastapi import APIRouter, HTTPException, status
-from ..modelos.clientes import  Cliente, ClienteCrear, ClienteEditar
+from ..modelos.clientes import  Cliente, ClienteCrear, ClienteEditar, ClienteEliminar
 from ..listas import lista_clientes
 from ..conexion_bd import Sesion_dependencia
 from sqlmodel import select
 
-
 rutas_clientes = APIRouter()
 
 
+#CRUD CLIENTES
 
-# Endpoint para obtener o listar todos los clientes
-@rutas_clientes.get("/clientes", response_model=list[Cliente])
-async def listar_clientes():
-    return lista_clientes
+#LISTAR CLIENTES
+@rutas_clientes.get("/clientes")
+async def listar_cliente(mi_sesion: Sesion_dependencia):
+    cliente_lis = mi_sesion.exec(select(Cliente)).all()
+    return cliente_lis
+    
+#LISTAR CLIENTES POR ID
+@rutas_clientes.get("/clientes/{id}")
+async def listar_cliente(id:int, mi_sesion: Sesion_dependencia):
+    cliente_list = mi_sesion.get(Cliente, id)
+    if not cliente_list:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Cliente no encontrado con el ID {id}")
+    return cliente_list
 
+#CREAR CLIENTES
 
-# Endpoint para obtener o listar un solo cliente de la lista
-@rutas_clientes.get(
-        "/clientes/{cliente_id}",
-          response_model=Cliente,
-          )
-async def listar_cliente(cliente_id: int, sesion: sesion_dependencia):
-    #recorrer la lista_clientes
-    for i, obj_cliente in enumerate(lista_clientes):
-        if obj_cliente.id == cliente_id:
-            return obj_cliente
-    raise HTTPException(
-        status_code=400,
-        detail=f"El cliente con id {cliente_id} no existe"
-    )
-
-
-        
-# endpoint para crear un cliente, y agregar a la lista
 @rutas_clientes.post("/clientes", response_model=Cliente)
-async def crear_cliente(datos_cliente: ClienteCrear, sesion: Sesion_dependencia):
-    cliente_val = Cliente.model_validate(datos_cliente.model_dump())
-    # generar id
-    sesion.add(cliente_val)
-    sesion.commit()
-    sesion.refresh(cliente_val) 
-    return cliente_val
+async def crear_clientes(datos_cliente:ClienteCrear, mi_sesion: Sesion_dependencia):
+    Cliente_val = Cliente.model_validate(datos_cliente.model_dump())
+    mi_sesion.add(Cliente_val)
+    mi_sesion.commit()
+    mi_sesion.refresh(Cliente_val)
+    return Cliente_val
 
 
-# endpoint para editar un cliente, y agregar a la lista
-@rutas_clientes.patch("/clientes/{cliente_id}", response_model=Cliente)
-async def editar_cliente(cliente_id: int, datos_cliente: ClienteEditar):
-    for i, obj_cliente in enumerate(lista_clientes):
-        if obj_cliente.id == cliente_id:
-            # validar cliente
-            cliente_val = Cliente.model_validate(datos_cliente.model_dump())
-            cliente_val.id = cliente_id
-            lista_clientes[i] = cliente_val
-            return cliente_val
-    raise HTTPException(status_code=400 , detail=f"El Cliente con id {cliente_id} no existe"
-    )    
-    
-    
-    # Endpoint para eliminar un cliente
-@rutas_clientes.delete("/clientes/{cliente_id}", response_model=Cliente)
-async def eliminar_cliente(cliente_id: int):
-    for i, obj_cliente in enumerate(lista_clientes):
-        if obj_cliente.id == cliente_id:
-            cliente_eliminado = lista_clientes.pop(i)
-            return cliente_eliminado
+#EDITAR CLIENTES 
+@rutas_clientes.put("/cliente/{id}")
+async def editar_clientes(id:int, datos_cliente:ClienteEditar, mi_sesion: Sesion_dependencia):
+    cliente_bd = mi_sesion.get(Cliente, id)
 
-    raise HTTPException(
-        status_code=400,
-        detail=f"El cliente con id {cliente_id} no existe"
-    )
-    
+    if not cliente_bd:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"El cliente conID {id}, no existe")
+    cliente_dict = datos_cliente.model_dump(exclude_unset=True)
+    cliente_bd.sqlmodel_update(cliente_dict)
+    mi_sesion.add(cliente_bd)
+    mi_sesion.commit()
+    mi_sesion.refresh(cliente_bd)
+             
+    return cliente_bd
+
+
+#ELIMINAR CLIENTES 
+@rutas_clientes.delete("/cliente/{id}")
+async def eliminar_clientes(id:int, datos_cliente:ClienteEliminar, mi_sesion: Sesion_dependencia):
+    cliente_bd = mi_sesion.get(Cliente, id)
+
+    if not cliente_bd:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"El cliente conID {id}, no existe")
+    cliente_dict = datos_cliente.model_dump(exclude_unset=True)
+    cliente_bd.sqlmodel_update(cliente_dict)
+    mi_sesion.delete(cliente_bd)
+    mi_sesion.commit()
+    return cliente_bd
