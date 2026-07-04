@@ -5,7 +5,7 @@ from sqlmodel import  SQLModel, Field, Relationship
 
 class ClienteBase(SQLModel):
     nombre: str = Field(default=None)
-    edad: int = Field(default=None)
+    email: str = Field(default=None)
     descripcion: str | None = Field(default=None)
     
 class ClienteCrear(ClienteBase):

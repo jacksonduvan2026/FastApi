@@ -5,19 +5,23 @@ from sqlmodel import Session, SQLModel, create_engine
 nombre_bd = "bd_clientes.sqlite3"
 url_bd = f"sqlite:///{nombre_bd}"
 
-#motor de bd
+#MOTOR BD
 motor_bd = create_engine(url_bd)
 
-#definir el metodo para crear las tablas
-def crear_tablas(app:FastAPI):
+
+#METODO DE TABLAS 
+def crear_tablas(app: FastAPI):
     SQLModel.metadata.create_all(motor_bd)
-    yield # no hay nada para retornar o ejecutar
+    yield 
 
-#definir el metod para la sesion
+
+#METODO DE SESION 
 def obtener_sesion():
-    with Session(motor_bd) as sesion:
-        yield sesion#retorna la sesion
+    with Session(motor_bd) as mi_sesion:
+        yield mi_sesion
+        
+#INYECCION DE DEPENDENCIAS 
 
-#denominado inyeccion de dependencias
-#registrar la sesion como dependencia, utilizada en nuestros endpoints
-sesion_dependencia = Annotated[Session, Depends(obtener_sesion)]
+#REGISTRO DE SESION 
+
+Sesion_dependencia = Annotated[Session, Depends(obtener_sesion)]
