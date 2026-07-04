@@ -1,0 +1,101 @@
+[33mcommit c48d46f91300944bd841b5b06a64ae54261863bc[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Sat Jul 4 12:02:08 2026 -0500
+
+    solucion de erorres
+
+[33mcommit dacc88ecf8981de0f3ae259ec79d76c07e60f133[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Sat Jul 4 11:51:49 2026 -0500
+
+    arreglo
+
+[33mcommit 0a311ca50760a7a5244b81b375a54cf6b37a99f6[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Sat Jul 4 11:24:38 2026 -0500
+
+     actualizacion
+
+[33mcommit 1d73d6c89de106972a8138760b0cc8f2abca8a10[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Sat Jul 4 08:59:21 2026 -0500
+
+     video 15 parte 2 creacion de clientes y listar todos
+
+[33mcommit 1df67f23b882ac27d05f88eb15c71eec62338534[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Sat Jul 4 08:19:32 2026 -0500
+
+    Proyecto API
+
+[33mcommit 269086d6583fa253b71c37ee8daf4a43d37046e6[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Sat Jul 4 01:51:03 2026 -0500
+
+    video 14, instalacion sqlmodel parte1
+
+[33mcommit ed05b76462c02bff2c3bdd5e9ddf2f93bb33d7e4[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Sat Jul 4 01:28:52 2026 -0500
+
+    video 13 enrutador completo
+
+[33mcommit ca54188fba0bacb6825c9ade51f9d60dd210dd6e[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Sat Jul 4 00:59:05 2026 -0500
+
+    video 12 enrutador clientes
+
+[33mcommit deb9a5ea6ccd358b16a189ff39d02328ef703251[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Sat Jul 4 00:22:46 2026 -0500
+
+    video 11 estructura
+
+[33mcommit 028a0a4e919bdce75d07b2dda8bd7f329b874391[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Sat Jul 4 00:09:38 2026 -0500
+
+    video 10
+
+[33mcommit 0e1fafe2a501b8b36c0e5ddf1887ef27a8aff3c1[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Fri Jul 3 00:31:49 2026 -0500
+
+    crear facturas editado junto con el modelo factura
+
+[33mcommit 3e008327a70e92ceef1db6e77355478dad6740cd[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Thu Jul 2 23:47:52 2026 -0500
+
+    endpoint listar una sola factura y el manejo de excepciones
+
+[33mcommit 068ac0e760ce60be5b7101fbde2a771dda68fd73[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Thu Jul 2 22:52:20 2026 -0500
+
+    nuevo commit
+
+[33mcommit cc30e38264c5c2ff6eb021e7aed2740ec041348f[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Thu Jul 2 22:20:31 2026 -0500
+
+    se creo el endpoint de editar junto con el de eliminar
+
+[33mcommit 9d320236a3d4d327bf56eac131e56542c0d7025c[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Thu Jul 2 21:25:53 2026 -0500
+
+    separacion de modelos
+
+[33mcommit c2705a2e4980484dba7dcfc9c0972ff00c362388[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Tue Jun 30 19:11:18 2026 -0500
+
+    Creé el primer modelo de clientes y dos endpoints
+
+[33mcommit 03fe90c9f8d8a6e72ad3a543d54c1005a3ada65e[m
+Author: jacksonduvan2026 <jacksonsena2026@gmail.com>
+Date:   Tue Jun 30 17:23:35 2026 -0500
+
+    primer commit

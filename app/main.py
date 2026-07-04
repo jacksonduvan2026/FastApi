@@ -23,4 +23,3 @@ app.include_router(transacciones.rutas_transacciones, tags=["Transacciones"])
 
     
     
-        
