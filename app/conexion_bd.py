@@ -2,11 +2,12 @@ from fastapi import FastAPI, Depends
 from typing import Annotated
 from sqlmodel import Session, create_engine, SQLModel
 
-nombre_bd = "base_datos.sqlite3"
+nombre_bd = "bd_clientes.sqlite3"
 url_bd = f"sqlite:///{nombre_bd}"
 
 #motor de base de datos
 motor_bd = create_engine(url_bd)
+
 
 #definir el metodo para crear las tablas
 def crear_tablas(app: FastAPI):
